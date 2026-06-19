@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  contracts:
+    name: Soroban contracts (Rust)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Build workspace
+        run: cargo build --workspace --locked
+      - name: Test workspace
+        run: cargo test --workspace --locked
+      # NOTE: contracts/crowdfund is intentionally excluded from the workspace
+      # (see docs/CROWDFUND_REMEDIATION.md). A legacy SDK-21 test long-tail is
+      # tracked in docs/TEST_MIGRATION_NOTES.md.
+
+  web:
+    name: Web (Next.js)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install
+        run: npm install --no-audit --no-fund --legacy-peer-deps
+      - name: Lint
+        run: npm run lint --workspace=@rock-buttom/web --if-present
+      - name: Unit tests (Vitest)
+        run: npm run test --workspace=@rock-buttom/web --if-present
+      - name: Build
+        run: npm run build --workspace=@rock-buttom/web --if-present
+
+  backend:
+    name: Backend (NestJS)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install
+        run: npm install --no-audit --no-fund --legacy-peer-deps
+      - name: Build
+        run: npm run build --workspace=@rock-buttom/backend --if-present

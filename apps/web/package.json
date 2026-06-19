@@ -9,11 +9,9 @@
     "start": "next start",
     "lint": "eslint",
     "format": "prettier --write .",
-    "test": "jest --run",
-    "test:coverage": "jest --coverage",
-    "test:vitest": "vitest --run",
-    "test:vitest:watch": "vitest",
-    "test:vitest:coverage": "vitest run --coverage"
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@radix-ui/react-slot": "1.2.4",
@@ -38,7 +36,6 @@
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.2",
     "@testing-library/user-event": "14.6.1",
-    "@types/jest": "30.0.0",
     "@types/node": "20.19.37",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
@@ -49,13 +46,10 @@
     "eslint-config-next": "^14.2.35",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react-hooks": "^5.2.0",
-    "jest": "30.3.0",
     "jest-axe": "^8.0.0",
-    "jest-environment-jsdom": "30.3.0",
     "jsdom": "26.1.0",
     "prettier": "^3.8.3",
     "tailwindcss": "4.2.2",
-    "ts-jest": "29.4.6",
     "typescript": "5.9.3",
     "vitest": "4.1.2"
   }

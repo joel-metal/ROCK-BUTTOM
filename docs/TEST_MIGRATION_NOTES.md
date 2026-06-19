@@ -43,3 +43,28 @@ behavior under SDK 25.
 
 Fix the shared `LedgerInfo` test helper first — it unblocks the largest cluster
 (~20 token tests) in one change. Then revisit auth `should_panic` tests per contract.
+
+---
+
+# Frontend: Jest → Vitest standardization (`apps/web`)
+
+The platform standardizes on **Vitest** as the single frontend test runner. The
+inherited Fund-My-Cause suite was written against Jest (the repo shipped both
+configs). Done in this repo:
+
+- `apps/web` scripts: `test` / `test:coverage` now run Vitest; Jest scripts removed.
+- Removed `jest.config.ts`, `jest.setup.ts`, and the Jest runner devDeps
+  (`jest`, `ts-jest`, `jest-environment-jsdom`, `@types/jest`).
+- `vitest.setup.ts` adds a `jest → vi` global shim so the ~290 `jest.fn` /
+  `jest.spyOn` / `jest.clearAllMocks` / fake-timer calls run unchanged.
+
+### Remaining follow-up
+- **`jest.mock()` hoisting (~70 calls):** Vitest hoists only `vi.mock`. Convert
+  `jest.mock(` → `vi.mock(` in the affected test files so module mocks intercept
+  imports correctly.
+- **`jest.requireActual` (1) / `jest.requireMock` (8):** map to `vi.importActual` /
+  `vi.importMock` (async) where used.
+- **`jest.Mock` type (10):** replace with Vitest's `Mock` type. Type-only, so it
+  does not break runtime, but `tsc` will flag it.
+
+Run `npm run test --workspace=@rock-buttom/web` after these to confirm green.

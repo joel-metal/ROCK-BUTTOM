@@ -644,16 +644,18 @@ mod tests {
     }
 
     fn has_event(env: &soroban_sdk::Env, topic1: &str, topic2: &str) -> bool {
-        let t1 = Symbol::new(env, topic1);
-        let t2 = Symbol::new(env, topic2);
-        env.events().all().iter().any(|e| {
-            let topics = e.1;
-            if topics.len() < 2 {
-                return false;
+        use soroban_sdk::xdr::{ContractEventBody, ScVal};
+        let sym_eq = |v: &ScVal, s: &str| match v {
+            ScVal::Symbol(sym) => sym.as_slice() == s.as_bytes(),
+            _ => false,
+        };
+        let all = env.events().all();
+        all.events().iter().any(|e| match &e.body {
+            ContractEventBody::V0(v0) => {
+                v0.topics.len() >= 2
+                    && sym_eq(&v0.topics[0], topic1)
+                    && sym_eq(&v0.topics[1], topic2)
             }
-            let s0 = Symbol::from_val(env, &topics.get(0).unwrap());
-            let s1 = Symbol::from_val(env, &topics.get(1).unwrap());
-            s0 == t1 && s1 == t2
         })
     }
 

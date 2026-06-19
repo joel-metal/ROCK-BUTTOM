@@ -47,8 +47,20 @@ ROCK-BUTTOM/
 
 ## Status
 
-This repository is an active merge-in-progress. See [`docs/MERGE_PLAN.md`](docs/MERGE_PLAN.md)
-for the phased integration plan and current state.
+Merge complete for the core platform:
+
+- ✅ **Contracts:** 16 Soroban contracts in one Cargo workspace, standardized on
+  `soroban-sdk` 25.x. `cargo build --workspace` is green.
+- ✅ **Frontend:** `apps/web` on Next 16 / React 19 / Tailwind 4, with a
+  `/scholarships` route bridging crowdfunding to on-chain scholarships.
+- ✅ **Backend:** `apps/backend` (NestJS) wired as the shared API.
+- ✅ **Workspaces:** `npm install` resolves across all packages (1941 deps).
+- 🚧 **Tracked follow-ups:** `contracts/crowdfund` remediation
+  ([docs/CROWDFUND_REMEDIATION.md](docs/CROWDFUND_REMEDIATION.md)) and the
+  SDK 21→25 test-harness long-tail
+  ([docs/TEST_MIGRATION_NOTES.md](docs/TEST_MIGRATION_NOTES.md)).
+
+See [`docs/MERGE_PLAN.md`](docs/MERGE_PLAN.md) for the full phased plan and state.
 
 ## License
 

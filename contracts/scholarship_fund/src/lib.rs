@@ -18,7 +18,7 @@ pub struct ScholarshipApplication {
     pub id: u64,
     pub student: Address,
     pub amount_requested: i128,
-    pub status: u8, // 0=pending, 1=approved, 2=rejected, 3=distributed
+    pub status: u32, // 0=pending, 1=approved, 2=rejected, 3=distributed
     pub applied_at: u64,
 }
 

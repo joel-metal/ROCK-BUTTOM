@@ -22,7 +22,7 @@ async function getClient() {
   _client = await SignClient.init({
     projectId: getProjectId(),
     metadata: {
-      name: "Fund-My-Cause",
+      name: "Rock-Buttom",
       description: "Decentralized crowdfunding on Stellar",
       url: typeof window !== "undefined" ? window.location.origin : "",
       icons: [],

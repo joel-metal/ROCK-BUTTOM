@@ -22,7 +22,7 @@ describe('Pact Provider Verification', () => {
 
   it('should verify all pacts from consumers', async () => {
     const verifier = new Verifier({
-      provider: 'BrainStorm-Backend',
+      provider: 'RockButtom-Backend',
       providerBaseUrl: 'http://localhost:3000',
       pactFiles: [path.resolve(__dirname, '../../pacts')],
       stateHandlers: {

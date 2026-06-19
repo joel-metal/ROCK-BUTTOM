@@ -24,7 +24,7 @@ export class CertificatePdfService {
         size: 10,
         x: 72,
         y: 415,
-        text: `brain-storm://certificates/${certificate.id}/verify`,
+        text: `rock-buttom://certificates/${certificate.id}/verify`,
       },
     ];
 

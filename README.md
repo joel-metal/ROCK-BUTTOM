@@ -33,18 +33,19 @@ campaign can fund scholarships, grants, and education causes from end to end.
 
 ## Overview
 
-ROCK-BUTTOM consolidates two previously separate projects into one monorepo:
+ROCK-BUTTOM unifies two capability areas — blockchain education and decentralized
+crowdfunding — in one monorepo:
 
-| Source project | Domain | Folded into |
+| Capability | Domain | Lives in |
 | --- | --- | --- |
-| **Brain-Storm** | Blockchain education — credentials, learn-to-earn, governance | `contracts/*`, `apps/backend`, `apps/web` |
-| **Fund-My-Cause** | Decentralized crowdfunding — goal-based campaigns, refunds | `contracts/crowdfund`, `contracts/registry`, `apps/web` |
+| **Education suite** | Credentials, learn-to-earn, governance | `contracts/*`, `apps/backend`, `apps/web` |
+| **Crowdfunding engine** | Goal-based campaigns, pull-based refunds | `contracts/crowdfund`, `contracts/registry`, `apps/web` |
 
-The integration is more than co-location. Brain-Storm already ships
-`scholarship_fund` and `grants` contracts; Fund-My-Cause supplies the crowdfunding
-engine those features always implied. Together they form a single flow: **contribute
-to a campaign → funds are held and released on-chain → scholarships and grants are
-disbursed with verifiable credentials.**
+The integration is more than co-location. The education suite already ships
+`scholarship_fund` and `grants` contracts; the crowdfunding engine supplies the
+campaign mechanics those features always implied. Together they form a single flow:
+**contribute to a campaign → funds are held and released on-chain → scholarships and
+grants are disbursed with verifiable credentials.**
 
 ## Features
 
@@ -64,26 +65,61 @@ events; the contracts are the source of truth for funds and credentials.
 ### System overview
 
 ```
-          ┌──────────────────────────────────────────────────────────────┐
-          │                       Users & Wallets                         │
-          │              Freighter · WalletConnect · Lobstr               │
-          └───────────────┬───────────────────────────────┬──────────────┘
-                          │ HTTPS (UI)                     │ sign & submit tx
-                          ▼                                ▼
-        ┌─────────────────────────────┐      ┌──────────────────────────────┐
-        │     apps/web — Next.js 16    │      │   Stellar / Soroban network  │
-        │  React 19 · Tailwind 4       │      │  ┌────────────────────────┐  │
-        │  TanStack Query · Stellar SDK│◄────►│  │  contracts/ (Rust)     │  │
-        └──────────────┬──────────────┘ read │  │  crowdfund · registry  │  │
-                       │ REST/JSON      state │  │  scholarship_fund      │  │
-                       ▼                      │  │  grants · token · …    │  │
-        ┌─────────────────────────────┐      │  └────────────────────────┘  │
-        │   apps/backend — NestJS      │─────►└──────────────────────────────┘
-        │   TypeORM · JWT · indexer    │  reads/writes via Stellar SDK
-        │      ▲             ▲         │
-        │  PostgreSQL      Redis       │   off-chain data · cache · sessions
-        └─────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────┐
+│          CLIENT   ·   apps/web — Next.js 16 · React 19 · Tailwind 4         │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ Navbar          ProgressBar       PledgeModal       CountdownTimer          │
+│ Freighter conn  campaign progress contribution flow  deadline               │
+│                                                                             │
+│ WalletContext — Freighter · WalletConnect · Lobstr                          │
+│ address · connect() · disconnect() · signTx()                               │
+└─────────────────────────────────────────────────────────────────────────────┘
+                     │                                        │
+                     │ off-chain data (REST)                  │ sign & submit XDR
+                     ▼                                        ▼
+┌──────────────────────────────────────────┐  ┌───────────────────────────────┐
+│      apps/backend — NestJS REST API      │  │      Stellar Soroban RPC      │
+├──────────────────────────────────────────┤  ├───────────────────────────────┤
+│ TypeORM · JWT · chain indexer            │  │ simulate · submit · poll      │
+│                                          │  │                               │
+│ auth · courses · enrollments             │  │ + Horizon API                 │
+│ progress · certificates · payouts        │  │ balances · transactions       │
+│ notifications · search · analytics       │  │                               │
+│                                          │  │                               │
+│ PostgreSQL        Redis                  │  │                               │
+│ users · courses   cache · sessions       │  │                               │
+└──────────────────────────────────────────┘  └───────────────────────────────┘
+                     │                                        │
+                     │ via Stellar SDK                        │ invoke contracts
+                     └─────────────────┬──────────────────────┘
+                                       ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│             contracts/ — Soroban smart contracts (Rust · wasm32)            │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ Crowdfunding  crowdfund · registry                                          │
+│               initialize() contribute() withdraw() refund_single()          │
+│                                                                             │
+│ Education     token (SEP-41) · certificate · governance · reputation        │
+│               mint_reward() issue_credential() propose() vote()             │
+│                                                                             │
+│ Funding       scholarship_fund · grants  (milestone disbursement)           │
+│ Shared        RBAC · pausable · reentrancy guard · validation               │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                       │ store state
+                                       ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                                Stellar Ledger                               │
+│        instance & persistent storage (TTL) · 5s finality · immutable        │
+└─────────────────────────────────────────────────────────────────────────────┘
 ```
+
+**Key flow** — a contributor connects Freighter and pledges to a campaign
+(`contribute()`); funds are escrowed on-chain. On success the owner calls
+`withdraw()`, the `scholarship_fund` / `grants` contracts disburse to recipients,
+and the `certificate` and `token` contracts mint verifiable credentials and reward
+tokens. If a goal misses its deadline, contributors reclaim funds via pull-based
+`refund_single()`. The backend indexes these on-chain events to serve off-chain
+views — courses, progress, notifications — while the wallet signs every state change.
 
 ### Repository layout
 

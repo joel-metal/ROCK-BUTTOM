@@ -76,7 +76,7 @@ function buildIframeCode(
   width="${width}"
   height="${height}"
   style="border:none;border-radius:16px;overflow:hidden;"
-  title="${campaignTitle} — Fund-My-Cause"
+  title="${campaignTitle} — Rock-Buttom"
   loading="lazy"
   allow="payment"
 ></iframe>`;

@@ -1,6 +1,6 @@
-# @brain-storm/types
+# @rock-buttom/types
 
-Shared TypeScript types, DTOs, and interfaces for the Brain-Storm platform.
+Shared TypeScript types, DTOs, and interfaces for the Rock-Buttom platform.
 
 ## Usage
 
@@ -10,7 +10,7 @@ import type {
   CreateCourseDto,
   PaginatedResponse,
   AppErrorResponse,
-} from '@brain-storm/types';
+} from '@rock-buttom/types';
 ```
 
 ## Type Categories

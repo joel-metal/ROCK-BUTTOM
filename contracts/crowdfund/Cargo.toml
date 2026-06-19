@@ -3,8 +3,8 @@ name = "crowdfund"
 version = "0.1.0"
 edition = "2021"
 publish = false
-description = "Fund-My-Cause crowdfunding smart contract for the Stellar/Soroban network"
-documentation = "https://fund-my-cause.github.io/Fund-My-Cause/crowdfund"
+description = "Rock-Buttom crowdfunding smart contract for the Stellar/Soroban network"
+documentation = "https://rock-buttom.github.io/Rock-Buttom/crowdfund"
 readme = "../../README.md"
 license = "MIT"
 

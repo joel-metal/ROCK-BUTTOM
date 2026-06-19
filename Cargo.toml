@@ -2,12 +2,12 @@
 resolver = "2"
 members = ["contracts/*"]
 # `benchmarks` is a bench harness, not a deployable contract.
-# `crowdfund` is quarantined: it is incomplete in the Fund-My-Cause source
+# `crowdfund` is quarantined: it is incomplete in the Rock-Buttom source
 # (references undefined types + removed SDK APIs). See docs/CROWDFUND_REMEDIATION.md.
 exclude = ["contracts/benchmarks", "contracts/crowdfund"]
 
 [workspace.dependencies]
-# Standardized Soroban SDK for the whole platform (was 21.x in Brain-Storm).
+# Standardized Soroban SDK for the whole platform (was 21.x in Rock-Buttom).
 soroban-sdk = "25.3.0"
 insta = { version = "1.37", features = ["redactions"] }
 

@@ -1,6 +1,6 @@
 # Standardized Logging Guide
 
-This guide explains how to use the standardized logging system in Brain-Storm backend.
+This guide explains how to use the standardized logging system in Rock-Buttom backend.
 
 ## Overview
 

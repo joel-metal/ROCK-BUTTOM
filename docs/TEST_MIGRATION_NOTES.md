@@ -49,7 +49,7 @@ Fix the shared `LedgerInfo` test helper first — it unblocks the largest cluste
 # Frontend: Jest → Vitest standardization (`apps/web`)
 
 The platform standardizes on **Vitest** as the single frontend test runner. The
-inherited Fund-My-Cause suite was written against Jest (the repo shipped both
+inherited Rock-Buttom suite was written against Jest (the repo shipped both
 configs). Done in this repo:
 
 - `apps/web` scripts: `test` / `test:coverage` now run Vitest; Jest scripts removed.

@@ -3,8 +3,8 @@ name = "registry"
 version = "0.1.0"
 edition = "2021"
 publish = false
-description = "Fund-My-Cause registry contract — on-chain campaign discovery for the Stellar/Soroban network"
-documentation = "https://fund-my-cause.github.io/Fund-My-Cause/registry"
+description = "Rock-Buttom registry contract — on-chain campaign discovery for the Stellar/Soroban network"
+documentation = "https://rock-buttom.github.io/Rock-Buttom/registry"
 readme = "../../README.md"
 license = "MIT"
 

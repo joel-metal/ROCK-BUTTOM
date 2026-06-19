@@ -4,7 +4,7 @@ describe('Accessibility - Navbar', () => {
   it('should have proper heading hierarchy', () => {
     render(
       <div>
-        <h1>Fund My Cause</h1>
+        <h1>Rock Buttom</h1>
         <h2>Featured Campaigns</h2>
       </div>
     );

@@ -3,7 +3,7 @@ import { ReactQueryProvider } from "@/context/ReactQueryProvider";
 import "../../globals.css";
 
 export const metadata: Metadata = {
-  title: "Fund-My-Cause — Campaign Widget",
+  title: "Rock-Buttom — Campaign Widget",
   robots: { index: false, follow: false },
 };
 

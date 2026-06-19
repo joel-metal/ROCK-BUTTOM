@@ -35,7 +35,7 @@ const PLATFORMS = [
       </svg>
     ),
     getUrl: (url: string, title: string) =>
-      `https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out "${title}" on Fund-My-Cause! ${url}`)}`,
+      `https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out "${title}" on Rock-Buttom! ${url}`)}`,
   },
   {
     id: "facebook",
@@ -96,7 +96,7 @@ export function ShareModal({ campaignId, campaignTitle, onClose }: ShareModalPro
 
   const handleEmail = () => {
     const subject = encodeURIComponent(`Check out: ${campaignTitle}`);
-    const body = encodeURIComponent(`I thought you might be interested in this campaign on Fund-My-Cause:\n\n${campaignTitle}\n${campaignUrl}`);
+    const body = encodeURIComponent(`I thought you might be interested in this campaign on Rock-Buttom:\n\n${campaignTitle}\n${campaignUrl}`);
     window.location.href = `mailto:?subject=${subject}&body=${body}`;
   };
 

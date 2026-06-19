@@ -7,7 +7,7 @@ let dataSource: DataSource;
 
 export async function setupTestDatabase(): Promise<DataSource> {
   container = await new PostgreSqlContainer()
-    .withDatabase('brain-storm-test')
+    .withDatabase('rock-buttom-test')
     .withUsername('test-user')
     .withPassword('test-password')
     .start();

@@ -39,7 +39,7 @@ exports[`Navbar snapshots matches snapshot in connected state 1`] = `
         <span
           class="hidden sm:inline"
         >
-          Fund-My-Cause
+          Rock-Buttom
         </span>
       </div>
       <div
@@ -257,7 +257,7 @@ exports[`Navbar snapshots matches snapshot in disconnected state 1`] = `
         <span
           class="hidden sm:inline"
         >
-          Fund-My-Cause
+          Rock-Buttom
         </span>
       </div>
       <div

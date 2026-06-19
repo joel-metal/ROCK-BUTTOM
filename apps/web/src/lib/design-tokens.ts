@@ -1,5 +1,5 @@
 /**
- * Design tokens for Fund-My-Cause.
+ * Design tokens for Rock-Buttom.
  *
  * These values are the single source of truth. They are mirrored as CSS custom
  * properties in globals.css so they are available to Tailwind utilities and

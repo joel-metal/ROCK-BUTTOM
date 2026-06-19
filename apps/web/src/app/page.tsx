@@ -218,7 +218,7 @@ export default function Home() {
       <footer className="border-t border-gray-800 mt-auto">
         <div className="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
           <div className="flex items-center gap-2 font-semibold text-white">
-            <Rocket size={16} className="text-indigo-400" /> Fund-My-Cause
+            <Rocket size={16} className="text-indigo-400" /> Rock-Buttom
           </div>
           <div className="flex gap-5">
             <Link href="/campaigns" className="hover:text-white transition">

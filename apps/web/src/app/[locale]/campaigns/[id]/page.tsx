@@ -50,13 +50,13 @@ export async function generateMetadata({
     const description = c.description.slice(0, 160);
     const url = `${APP_BASE_URL}/campaigns/${id}`;
     return {
-      title: `${c.title} — Fund-My-Cause`,
+      title: `${c.title} — Rock-Buttom`,
       description,
       openGraph: {
         title: c.title,
         description,
         url,
-        siteName: "Fund-My-Cause",
+        siteName: "Rock-Buttom",
         images: [
           { url: DEFAULT_HERO_IMAGE, width: 1200, height: 630, alt: c.title },
         ],
@@ -70,7 +70,7 @@ export async function generateMetadata({
       },
     };
   } catch {
-    return { title: "Campaign — Fund-My-Cause" };
+    return { title: "Campaign — Rock-Buttom" };
   }
 }
 

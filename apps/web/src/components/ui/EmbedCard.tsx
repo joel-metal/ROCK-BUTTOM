@@ -239,7 +239,7 @@ export function EmbedCard({
         <p className={`text-center text-[10px] mt-2 ${MUTED_CLASSES[theme]}`}>
           Powered by{" "}
           <span className="font-semibold" style={{ color: accent }}>
-            Fund-My-Cause
+            Rock-Buttom
           </span>
         </p>
       </div>

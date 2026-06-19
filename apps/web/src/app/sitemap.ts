@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { fetchAllCampaigns } from "@/lib/soroban";
 
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://fund-my-cause.app";
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://rock-buttom.app";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [

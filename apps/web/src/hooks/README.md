@@ -1,6 +1,6 @@
 # Custom React Hooks
 
-Reusable utility hooks for the Fund-My-Cause frontend. All hooks are fully typed and tree-shakeable via `src/hooks/index.ts`.
+Reusable utility hooks for the Rock-Buttom frontend. All hooks are fully typed and tree-shakeable via `src/hooks/index.ts`.
 
 ---
 
@@ -95,7 +95,7 @@ if (error) return <ErrorMessage message={error} />;
 
 ## Domain Hooks
 
-These hooks are specific to Fund-My-Cause and are also exported from `src/hooks/index.ts`.
+These hooks are specific to Rock-Buttom and are also exported from `src/hooks/index.ts`.
 
 | Hook | Description |
 |------|-------------|

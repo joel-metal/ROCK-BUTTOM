@@ -1,7 +1,7 @@
 # Crowdfund contract — remediation required
 
-The `contracts/crowdfund` contract (the centerpiece of the Fund-My-Cause side)
-**does not compile as inherited from the Fund-My-Cause `main` branch.** It is
+The `contracts/crowdfund` contract (the centerpiece of the Rock-Buttom side)
+**does not compile as inherited from the Rock-Buttom `main` branch.** It is
 temporarily excluded from the Cargo workspace (`Cargo.toml` → `exclude`) so the
 rest of the platform builds green.
 

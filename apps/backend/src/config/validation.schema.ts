@@ -34,7 +34,7 @@ export const validationSchema = Joi.object({
   EMAIL_SECURE: Joi.boolean().default(false),
   EMAIL_USER: Joi.string().required(),
   EMAIL_PASS: Joi.string().required(),
-  EMAIL_FROM: Joi.string().default('"Brain Storm" <no-reply@brainstorm.app>'),
+  EMAIL_FROM: Joi.string().default('"Rock Buttom" <no-reply@rockbuttom.app>'),
   EMAIL_ENABLED: Joi.boolean().default(false),
 
   // Frontend

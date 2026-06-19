@@ -245,7 +245,7 @@ export class AuthService {
     if (!user) throw new NotFoundException('User not found');
 
     const secret = generateSecret();
-    const otpauthUrl = generateURI({ label: user.email, issuer: 'Brain-Storm', secret });
+    const otpauthUrl = generateURI({ label: user.email, issuer: 'Rock-Buttom', secret });
     const qrCodeDataUrl = await qrcode.toDataURL(otpauthUrl);
 
     await this.usersService.update(userId, {

@@ -24,7 +24,7 @@ function progressPct(c: Campaign): number {
 
 // ── On-chain contracts that back this surface ────────────────────────────────
 // These are the Soroban contracts (contracts/scholarship_fund, contracts/grants)
-// inherited from Brain-Storm, funded by the crowdfunding engine from Fund-My-Cause.
+// inherited from Rock-Buttom, funded by the crowdfunding engine from Rock-Buttom.
 const ON_CHAIN_BACKING = [
   {
     name: "scholarship_fund",
@@ -67,7 +67,7 @@ export default function ScholarshipsPage() {
           <p className="mt-4 max-w-2xl text-lg text-[var(--color-text-muted)]">
             Every campaign here routes contributions into Stellar smart contracts
             that issue verifiable credentials and release scholarship funds when
-            goals are met — the bridge between Fund-My-Cause and Brain-Storm.
+            goals are met — the bridge between Rock-Buttom and Rock-Buttom.
           </p>
 
           <dl className="mt-8 flex flex-wrap gap-8">

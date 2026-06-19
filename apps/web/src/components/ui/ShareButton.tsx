@@ -17,7 +17,7 @@ export function ShareButton({ campaignId, campaignTitle }: ShareButtonProps) {
     ? `${window.location.origin}/campaigns/${campaignId}`
     : `/campaigns/${campaignId}`;
 
-  const tweetText = `I just backed "${campaignTitle}" on Fund-My-Cause! ${campaignUrl}`;
+  const tweetText = `I just backed "${campaignTitle}" on Rock-Buttom! ${campaignUrl}`;
 
   const handleCopy = async () => {
     try {

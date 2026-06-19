@@ -2,8 +2,8 @@ import { Pact, Matchers } from '@pact-foundation/pact';
 import axios from 'axios';
 
 const provider = new Pact({
-  consumer: 'BrainStormFrontend',
-  provider: 'BrainStormBackend',
+  consumer: 'RockButtomFrontend',
+  provider: 'RockButtomBackend',
   port: 8991,
 });
 

@@ -44,7 +44,7 @@ export const NETWORK_NAME =
     : "testnet";
 
 /** Application base URL for metadata and sharing */
-export const APP_BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://fund-my-cause.app";
+export const APP_BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://rock-buttom.app";
 
 // ──────────────────────────────────────────────────────────────────────────────
 // External API endpoints

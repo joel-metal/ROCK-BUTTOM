@@ -1,6 +1,6 @@
 # Winston Logging Implementation
 
-This directory contains the Winston logging implementation for the Brain-Storm backend API.
+This directory contains the Winston logging implementation for the Rock-Buttom backend API.
 
 ## Features
 

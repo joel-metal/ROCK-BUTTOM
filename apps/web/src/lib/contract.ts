@@ -1,5 +1,5 @@
 /**
- * Contract interaction layer for the Fund-My-Cause crowdfunding contract.
+ * Contract interaction layer for the Rock-Buttom crowdfunding contract.
  * Wraps all Soroban RPC calls using @stellar/stellar-sdk.
  */
 

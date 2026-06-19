@@ -49,7 +49,7 @@ describe('Visual Regression - Components', () => {
   it('should render Navbar consistently', () => {
     const { container } = render(
       <nav className="bg-white shadow-md p-4 flex justify-between items-center">
-        <div className="text-xl font-bold">Fund My Cause</div>
+        <div className="text-xl font-bold">Rock Buttom</div>
         <div className="flex gap-4">
           <a href="/">Home</a>
           <a href="/campaigns">Campaigns</a>
@@ -66,7 +66,7 @@ describe('Visual Regression - Layouts', () => {
     const { container } = render(
       <div className="min-h-screen">
         <header className="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-8">
-          <h1 className="text-4xl font-bold">Welcome to Fund My Cause</h1>
+          <h1 className="text-4xl font-bold">Welcome to Rock Buttom</h1>
         </header>
         <main className="p-8">
           <section className="grid grid-cols-3 gap-4">

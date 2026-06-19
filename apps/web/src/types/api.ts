@@ -1,5 +1,5 @@
 /**
- * API Response types for Fund-My-Cause
+ * API Response types for Rock-Buttom
  * Comprehensive type definitions for all API interactions
  */
 

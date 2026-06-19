@@ -152,7 +152,7 @@ impl TokenContract {
     // -------------------------------------------------------------------------
 
     pub fn name(_env: Env) -> String {
-        String::from_str(&_env, "Brain-Storm Token")
+        String::from_str(&_env, "Rock-Buttom Token")
     }
 
     pub fn symbol(_env: Env) -> String {
@@ -883,7 +883,7 @@ mod tests {
     #[test]
     fn test_metadata() {
         let (env, client, _) = setup();
-        assert_eq!(client.name(), String::from_str(&env, "Brain-Storm Token"));
+        assert_eq!(client.name(), String::from_str(&env, "Rock-Buttom Token"));
         assert_eq!(client.symbol(), String::from_str(&env, "BST"));
         assert_eq!(client.decimals(), 7);
     }

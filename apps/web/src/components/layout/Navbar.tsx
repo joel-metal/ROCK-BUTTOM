@@ -102,7 +102,7 @@ export function Navbar() {
       >
         <div className="flex items-center gap-2 font-bold text-lg text-[var(--color-text-primary)]">
           <Rocket className="text-[var(--color-brand)]" size={20} />
-          <span className="hidden sm:inline">Fund-My-Cause</span>
+          <span className="hidden sm:inline">Rock-Buttom</span>
         </div>
 
         {/* Desktop menu */}

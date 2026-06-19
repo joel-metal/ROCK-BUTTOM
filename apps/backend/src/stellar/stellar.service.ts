@@ -99,7 +99,7 @@ export class StellarService {
       })
         .addOperation(
           Operation.manageData({
-            name: `brain-storm:cert:${certificateHash.slice(0, 28)}`,
+            name: `rock-buttom:cert:${certificateHash.slice(0, 28)}`,
             value: recipientPublicKey,
           }),
         )
@@ -247,7 +247,7 @@ export class StellarService {
     })
       .addOperation(
         Operation.manageData({
-          name: `brain-storm:credential:${courseId}`,
+          name: `rock-buttom:credential:${courseId}`,
           value: recipientPublicKey,
         })
       )
@@ -300,7 +300,7 @@ export class StellarService {
     })
       .addOperation(
         Operation.manageData({
-          name: `brain-storm:credential:${courseId}`,
+          name: `rock-buttom:credential:${courseId}`,
           value: recipientPublicKey,
         })
       )

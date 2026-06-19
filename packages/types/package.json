@@ -1,7 +1,7 @@
 {
   "name": "@rock-buttom/types",
   "version": "1.0.0",
-  "description": "Shared TypeScript types for Brain-Storm",
+  "description": "Shared TypeScript types for Rock-Buttom",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -9,6 +9,6 @@
     "type-check": "tsc --noEmit"
   },
   "keywords": ["types", "typescript"],
-  "author": "Brain-Storm",
+  "author": "Rock-Buttom",
   "license": "MIT"
 }

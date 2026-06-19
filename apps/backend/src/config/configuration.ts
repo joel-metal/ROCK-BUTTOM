@@ -35,7 +35,7 @@ export default () => ({
     secure: process.env.EMAIL_SECURE === 'true',
     user: process.env.EMAIL_USER!,
     pass: process.env.EMAIL_PASS!,
-    from: process.env.EMAIL_FROM || '"Brain Storm" <no-reply@brainstorm.app>',
+    from: process.env.EMAIL_FROM || '"Rock Buttom" <no-reply@rockbuttom.app>',
     enabled: process.env.EMAIL_ENABLED === 'true',
   },
 

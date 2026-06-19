@@ -1,4 +1,4 @@
-//! # Fund-My-Cause Registry Contract
+//! # Rock-Buttom Registry Contract
 //!
 //! A lightweight Soroban contract that maintains a deduplicated, paginated list
 //! of all deployed [`CrowdfundContract`] campaign addresses on the Stellar network.
@@ -54,7 +54,7 @@ enum RegDataKey {
     CategoryList(u32),
 }
 
-/// The Fund-My-Cause registry contract.
+/// The Rock-Buttom registry contract.
 ///
 /// Maintains a deduplicated, append-only list of all deployed campaign contract
 /// addresses. Provides paginated read access for frontends and indexers.

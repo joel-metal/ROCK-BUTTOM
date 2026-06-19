@@ -94,7 +94,7 @@ describe('StellarService', () => {
       networkPassphrase: 'TESTNET',
     });
     expect(addOperation).toHaveBeenCalledWith({
-      name: 'brain-storm:credential:course-1',
+      name: 'rock-buttom:credential:course-1',
       value: 'GDEST',
     });
     expect(setTimeout).toHaveBeenCalledWith(30);

@@ -1,5 +1,5 @@
 /**
- * Utility and hook types for Fund-My-Cause
+ * Utility and hook types for Rock-Buttom
  * Type definitions for utilities, hooks, and helper functions
  */
 

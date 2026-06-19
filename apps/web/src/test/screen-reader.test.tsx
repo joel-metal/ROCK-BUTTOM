@@ -4,12 +4,12 @@ describe('Screen Reader Support', () => {
   it('should announce page title', () => {
     render(
       <div>
-        <h1>Fund My Cause - Crowdfunding Platform</h1>
+        <h1>Rock Buttom - Crowdfunding Platform</h1>
       </div>
     );
 
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
-      'Fund My Cause - Crowdfunding Platform'
+      'Rock Buttom - Crowdfunding Platform'
     );
   });
 

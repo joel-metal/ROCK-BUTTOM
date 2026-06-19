@@ -6,7 +6,7 @@ describe('Performance - Page Load Times', () => {
     
     render(
       <div>
-        <h1>Fund My Cause</h1>
+        <h1>Rock Buttom</h1>
         <p>Crowdfunding Platform</p>
       </div>
     );

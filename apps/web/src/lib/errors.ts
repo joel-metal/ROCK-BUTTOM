@@ -1,5 +1,5 @@
 /**
- * Centralized error handling utilities for Fund-My-Cause.
+ * Centralized error handling utilities for Rock-Buttom.
  *
  * Usage:
  *   import { toAppError, getUserMessage, ErrorCode } from "@/lib/errors";

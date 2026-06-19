@@ -53,7 +53,7 @@ async function bootstrap() {
   });
 
   const config = new DocumentBuilder()
-    .setTitle('Brain-Storm API')
+    .setTitle('Rock-Buttom API')
     .setDescription(
       'Blockchain education platform API powered by Stellar\n\n' +
         '## Authentication\n\n' +
@@ -66,15 +66,15 @@ async function bootstrap() {
         '### Example Flow\n\n' +
         '```bash\n' +
         '# Register\n' +
-        'curl -X POST https://api.brain-storm.com/v1/auth/register \\\n' +
+        'curl -X POST https://api.rock-buttom.com/v1/auth/register \\\n' +
         '  -H "Content-Type: application/json" \\\n' +
         '  -d \'{"email":"user@example.com","password":"securepass123"}\'\n\n' +
         '# Login\n' +
-        'curl -X POST https://api.brain-storm.com/v1/auth/login \\\n' +
+        'curl -X POST https://api.rock-buttom.com/v1/auth/login \\\n' +
         '  -H "Content-Type: application/json" \\\n' +
         '  -d \'{"email":"user@example.com","password":"securepass123"}\'\n\n' +
         '# Use token in subsequent requests\n' +
-        'curl -X GET https://api.brain-storm.com/v1/courses \\\n' +
+        'curl -X GET https://api.rock-buttom.com/v1/courses \\\n' +
         '  -H "Authorization: Bearer <your_access_token>"\n' +
         '```'
     )
@@ -104,6 +104,6 @@ async function bootstrap() {
   }
 
   await app.listen(port ?? 3000);
-  logger.log(`Brain-Storm API running on port ${port} [${nodeEnv}]`);
+  logger.log(`Rock-Buttom API running on port ${port} [${nodeEnv}]`);
 }
 bootstrap();

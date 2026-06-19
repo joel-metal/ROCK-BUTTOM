@@ -1,4 +1,4 @@
-//! # Fund-My-Cause Crowdfund Contract
+//! # Rock-Buttom Crowdfund Contract
 //!
 //! A Soroban smart contract for decentralised crowdfunding on the Stellar network.
 //!

@@ -19,7 +19,7 @@ export class CertificatePdfService {
       { size: 12, x: 72, y: 478, text: `Credential ID: ${credential.id}` },
       { size: 12, x: 72, y: 456, text: `Verification Ref: ${verificationRef}` },
       { size: 12, x: 72, y: 415, text: 'Scan target / verify payload:' },
-      { size: 10, x: 72, y: 392, text: `brain-storm://credentials/${credential.id}/verify` },
+      { size: 10, x: 72, y: 392, text: `rock-buttom://credentials/${credential.id}/verify` },
     ];
 
     const stream = [

@@ -1,5 +1,5 @@
 /**
- * Component prop types for Fund-My-Cause
+ * Component prop types for Rock-Buttom
  * Comprehensive type definitions for all component props
  */
 

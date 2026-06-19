@@ -18,7 +18,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 
 export const metadata: Metadata = {
-  title: "Fund-My-Cause",
+  title: "Rock-Buttom",
   description: "Decentralized crowdfunding on the Stellar network",
 };
 

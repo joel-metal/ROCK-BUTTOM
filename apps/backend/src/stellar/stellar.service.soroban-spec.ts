@@ -87,7 +87,7 @@ describe('StellarService - Soroban Testnet (Integration)', () => {
       try {
         const contractPath = path.join(
           __dirname,
-          '../../../contracts/analytics/target/wasm32-unknown-unknown/release/brain_storm_analytics.wasm'
+          '../../../contracts/analytics/target/wasm32-unknown-unknown/release/rock_buttom_analytics.wasm'
         );
 
         // Deploy contract

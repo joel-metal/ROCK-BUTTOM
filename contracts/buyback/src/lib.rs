@@ -220,11 +220,12 @@ impl BuybackContract {
             return;
         }
 
+        let trigger_reason = Symbol::new(&env, "price_thresh");
         Self::execute_buyback_via_dex(
             env,
             max_buyback_xlm,
             bst_price,
-            symbol_short!("price_thresh"),
+            trigger_reason,
         );
     }
 

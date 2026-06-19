@@ -521,7 +521,7 @@ impl AnalyticsContract {
 
     /// Get completed courses for a student (filtered by completion status).
     pub fn get_completed_courses(env: Env, student: Address) -> Vec<ProgressRecord> {
-        let all_progress = Self::get_all_progress(env, student);
+        let all_progress = Self::get_all_progress(env.clone(), student);
         let mut completed = vec![&env];
         
         for record in all_progress.iter() {
@@ -534,7 +534,7 @@ impl AnalyticsContract {
 
     /// Get in-progress courses for a student (filtered by completion status).
     pub fn get_in_progress_courses(env: Env, student: Address) -> Vec<ProgressRecord> {
-        let all_progress = Self::get_all_progress(env, student);
+        let all_progress = Self::get_all_progress(env.clone(), student);
         let mut in_progress = vec![&env];
         
         for record in all_progress.iter() {
@@ -553,13 +553,13 @@ impl AnalyticsContract {
         offset: u32,
         limit: u32,
     ) -> Vec<ProgressRecord> {
-        let all_progress = Self::get_all_progress(env, student);
+        let all_progress = Self::get_all_progress(env.clone(), student);
         let mut result = vec![&env];
         
         let start = offset as usize;
-        let end = (offset as usize + limit as usize).min(all_progress.len());
-        
-        if start < all_progress.len() {
+        let end = (offset as usize + limit as usize).min(all_progress.len() as usize);
+
+        if start < all_progress.len() as usize {
             for i in start..end {
                 result.push_back(all_progress.get(i as u32).unwrap().clone());
             }
@@ -574,7 +574,7 @@ impl AnalyticsContract {
         min_progress_pct: u32,
     ) -> Vec<ProgressRecord> {
         assert!(min_progress_pct <= 100, "Threshold must be 0-100");
-        let all_progress = Self::get_all_progress(env, student);
+        let all_progress = Self::get_all_progress(env.clone(), student);
         let mut filtered = vec![&env];
         
         for record in all_progress.iter() {
@@ -593,7 +593,7 @@ impl AnalyticsContract {
 
     /// Get average progress across all courses for a student.
     pub fn get_average_progress(env: Env, student: Address) -> u32 {
-        let all_progress = Self::get_all_progress(env, student);
+        let all_progress = Self::get_all_progress(env.clone(), student);
         if all_progress.len() == 0 {
             return 0;
         }

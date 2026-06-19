@@ -1,4 +1,5 @@
-use soroban_sdk::{contracttype, Address, Env, Symbol, Vec, symbol_short};
+use soroban_sdk::xdr::ToXdr;
+use soroban_sdk::{contracttype, symbol_short, Address, Bytes, BytesN, Env, Vec};
 
 #[contracttype]
 #[derive(Clone)]
@@ -7,7 +8,7 @@ pub struct AirdropCampaign {
     pub total_amount: i128,
     pub claimed_amount: i128,
     pub expiry_ledger: u32,
-    pub merkle_root: [u8; 32],
+    pub merkle_root: BytesN<32>,
 }
 
 #[contracttype]
@@ -30,7 +31,7 @@ pub fn create_airdrop(
     admin: &Address,
     total_amount: i128,
     expiry_ledger: u32,
-    merkle_root: [u8; 32],
+    merkle_root: BytesN<32>,
 ) -> u32 {
     admin.require_auth();
     assert!(total_amount > 0, "Total amount must be positive");
@@ -50,9 +51,7 @@ pub fn create_airdrop(
     env.storage()
         .instance()
         .set(&DataKey::AirdropCampaign(campaign_id), &campaign);
-    env.storage()
-        .instance()
-        .set(&count_key, &(campaign_id + 1));
+    env.storage().instance().set(&count_key, &(campaign_id + 1));
 
     env.events().publish(
         (symbol_short!("airdrop"), symbol_short!("created")),
@@ -67,7 +66,7 @@ pub fn claim_airdrop(
     campaign_id: u32,
     recipient: &Address,
     amount: i128,
-    proof: Vec<[u8; 32]>,
+    proof: Vec<BytesN<32>>,
 ) -> bool {
     recipient.require_auth();
     assert!(amount > 0, "Amount must be positive");
@@ -85,15 +84,12 @@ pub fn claim_airdrop(
     );
 
     let claim_key = DataKey::AirdropClaimed(campaign_id, recipient.clone());
-    assert!(
-        !env.storage().instance().has(&claim_key),
-        "Already claimed"
-    );
+    assert!(!env.storage().instance().has(&claim_key), "Already claimed");
 
     // Verify merkle proof
-    let leaf = compute_leaf(recipient, amount);
+    let leaf = compute_leaf(env, recipient, amount);
     assert!(
-        verify_merkle_proof(&leaf, &campaign.merkle_root, &proof),
+        verify_merkle_proof(env, &leaf, &campaign.merkle_root, &proof),
         "Invalid merkle proof"
     );
 
@@ -106,9 +102,7 @@ pub fn claim_airdrop(
         "Exceeds campaign total"
     );
 
-    env.storage()
-        .instance()
-        .set(&campaign_key, &campaign);
+    env.storage().instance().set(&campaign_key, &campaign);
     env.storage().instance().set(&claim_key, &true);
 
     env.events().publish(
@@ -159,40 +153,35 @@ pub fn has_claimed(env: &Env, campaign_id: u32, recipient: &Address) -> bool {
         .has(&DataKey::AirdropClaimed(campaign_id, recipient.clone()))
 }
 
-// Merkle tree helpers
-fn compute_leaf(recipient: &Address, amount: i128) -> [u8; 32] {
-    let mut leaf = [0u8; 32];
-    let recipient_bytes = recipient.to_xdr_bytes();
-    let amount_bytes = amount.to_le_bytes();
+// =============================================================================
+// Merkle tree helpers (SHA-256 based)
+// =============================================================================
 
-    for (i, &byte) in recipient_bytes.iter().take(16).enumerate() {
-        leaf[i] = byte;
-    }
-    for (i, &byte) in amount_bytes.iter().enumerate() {
-        leaf[16 + i] = byte;
-    }
-    leaf
+/// Compute the leaf hash for a (recipient, amount) pair.
+fn compute_leaf(env: &Env, recipient: &Address, amount: i128) -> BytesN<32> {
+    let mut data = recipient.to_xdr(env);
+    data.extend_from_array(&amount.to_be_bytes());
+    env.crypto().sha256(&data).to_bytes()
 }
 
-fn verify_merkle_proof(leaf: &[u8; 32], root: &[u8; 32], proof: &Vec<[u8; 32]>) -> bool {
-    let mut current = *leaf;
-
-    for &sibling in proof.iter() {
-        current = hash_pair(&current, &sibling);
+/// Verify a merkle proof by folding sibling hashes from leaf up to the root.
+fn verify_merkle_proof(
+    env: &Env,
+    leaf: &BytesN<32>,
+    root: &BytesN<32>,
+    proof: &Vec<BytesN<32>>,
+) -> bool {
+    let mut current = leaf.clone();
+    for sibling in proof.iter() {
+        current = hash_pair(env, &current, &sibling);
     }
-
     current == *root
 }
 
-fn hash_pair(a: &[u8; 32], b: &[u8; 32]) -> [u8; 32] {
-    let mut combined = [0u8; 64];
-    combined[..32].copy_from_slice(a);
-    combined[32..].copy_from_slice(b);
-
-    // Simple hash: XOR all bytes (not cryptographically secure, for demo)
-    let mut result = [0u8; 32];
-    for i in 0..32 {
-        result[i] = combined[i] ^ combined[i + 32];
-    }
-    result
+/// Hash two 32-byte nodes together into a parent hash.
+fn hash_pair(env: &Env, a: &BytesN<32>, b: &BytesN<32>) -> BytesN<32> {
+    let mut combined = Bytes::new(env);
+    combined.extend_from_array(&a.to_array());
+    combined.extend_from_array(&b.to_array());
+    env.crypto().sha256(&combined).to_bytes()
 }

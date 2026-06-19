@@ -59,7 +59,7 @@ pub struct VestingScheduleV2 {
     pub cliff_ledger: u32,
     pub end_ledger: u32,
     pub claimed: i128,
-    pub vesting_type: u8, // 0 = linear, 1 = step
+    pub vesting_type: u32, // 0 = linear, 1 = step
     pub step_count: u32,  // for step vesting
 }
 
@@ -445,7 +445,7 @@ impl TokenContract {
         total_amount: i128,
         cliff_ledger: u32,
         end_ledger: u32,
-        vesting_type: u8, // 0 = linear, 1 = step
+        vesting_type: u32, // 0 = linear, 1 = step
         step_count: u32,
     ) -> u32 {
         admin.require_auth();
@@ -580,7 +580,7 @@ impl TokenContract {
         admin: Address,
         total_amount: i128,
         expiry_ledger: u32,
-        merkle_root: [u8; 32],
+        merkle_root: soroban_sdk::BytesN<32>,
     ) -> u32 {
         airdrop::create_airdrop(&env, &admin, total_amount, expiry_ledger, merkle_root)
     }
@@ -590,7 +590,7 @@ impl TokenContract {
         campaign_id: u32,
         recipient: Address,
         amount: i128,
-        proof: soroban_sdk::Vec<[u8; 32]>,
+        proof: soroban_sdk::Vec<soroban_sdk::BytesN<32>>,
     ) -> bool {
         let claimed = airdrop::claim_airdrop(&env, campaign_id, &recipient, amount, proof);
         if claimed {

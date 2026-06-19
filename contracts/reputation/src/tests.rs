@@ -146,7 +146,7 @@ mod tests {
         let (env, client, admin) = setup();
         let user = Address::generate(&env);
         let reason = symbol_short!("course");
-        client.update_reputation(&admin, &user, &i128::MAX / 2, &reason, &None);
+        client.update_reputation(&admin, &user, &(i128::MAX / 2), &reason, &None);
         // Should not panic — checked_add used internally
     }
 }

@@ -3,11 +3,11 @@
 use proptest::prelude::*;
 use soroban_sdk::{testutils::Address as _, Address, Env};
 
-// Strategy for generating valid addresses
+// Strategy for generating valid addresses.
+// SDK 25 made Address::from_contract_id private; Address::generate is the public
+// testutils path for minting fresh, valid addresses in tests.
 fn arb_address() -> impl Strategy<Value = Address> {
-    prop::string::string_regex("[0-9A-Z]{56}").unwrap().prop_map(|s| {
-        Address::from_contract_id(&Env::default(), &s.as_bytes()[..32].try_into().unwrap())
-    })
+    Just(()).prop_map(|_| Address::generate(&Env::default()))
 }
 
 // Strategy for generating valid amounts (0 to MAX_SUPPLY)

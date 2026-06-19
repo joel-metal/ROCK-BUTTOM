@@ -913,7 +913,7 @@ mod tests {
         let user = Address::generate(&env);
         client.mint(&user, &500);
         let events = env.events().all();
-        assert!(!events.is_empty());
+        assert!(!events.events().is_empty());
     }
 
     // ---- Burn ---------------------------------------------------------------
@@ -1007,7 +1007,7 @@ mod tests {
         client.mint(&alice, &1000);
         client.approve(&alice, &spender, &500);
         let events = env.events().all();
-        assert!(!events.is_empty());
+        assert!(!events.events().is_empty());
     }
 
     // ---- Vesting (cliff / partial / full) -----------------------------------

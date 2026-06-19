@@ -64,54 +64,9 @@ events; the contracts are the source of truth for funds and credentials.
 
 ### System overview
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│          CLIENT   ·   apps/web — Next.js 16 · React 19 · Tailwind 4         │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ Navbar          ProgressBar       PledgeModal       CountdownTimer          │
-│ Freighter conn  campaign progress contribution flow  deadline               │
-│                                                                             │
-│ WalletContext — Freighter · WalletConnect · Lobstr                          │
-│ address · connect() · disconnect() · signTx()                               │
-└─────────────────────────────────────────────────────────────────────────────┘
-                     │                                        │
-                     │ off-chain data (REST)                  │ sign & submit XDR
-                     ▼                                        ▼
-┌──────────────────────────────────────────┐  ┌───────────────────────────────┐
-│      apps/backend — NestJS REST API      │  │      Stellar Soroban RPC      │
-├──────────────────────────────────────────┤  ├───────────────────────────────┤
-│ TypeORM · JWT · chain indexer            │  │ simulate · submit · poll      │
-│                                          │  │                               │
-│ auth · courses · enrollments             │  │ + Horizon API                 │
-│ progress · certificates · payouts        │  │ balances · transactions       │
-│ notifications · search · analytics       │  │                               │
-│                                          │  │                               │
-│ PostgreSQL        Redis                  │  │                               │
-│ users · courses   cache · sessions       │  │                               │
-└──────────────────────────────────────────┘  └───────────────────────────────┘
-                     │                                        │
-                     │ via Stellar SDK                        │ invoke contracts
-                     └─────────────────┬──────────────────────┘
-                                       ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│             contracts/ — Soroban smart contracts (Rust · wasm32)            │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ Crowdfunding  crowdfund · registry                                          │
-│               initialize() contribute() withdraw() refund_single()          │
-│                                                                             │
-│ Education     token (SEP-41) · certificate · governance · reputation        │
-│               mint_reward() issue_credential() propose() vote()             │
-│                                                                             │
-│ Funding       scholarship_fund · grants  (milestone disbursement)           │
-│ Shared        RBAC · pausable · reentrancy guard · validation               │
-└─────────────────────────────────────────────────────────────────────────────┘
-                                       │ store state
-                                       ▼
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                                Stellar Ledger                               │
-│        instance & persistent storage (TTL) · 5s finality · immutable        │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+<p align="center">
+  <img src="docs/assets/architecture.svg" alt="rock-buttom system overview — frontend and WalletContext sign and submit XDR to the Stellar Soroban RPC, which invokes the crowdfund, registry, and token contracts that persist state to the Stellar ledger" width="900">
+</p>
 
 **Key flow** — a contributor connects Freighter and pledges to a campaign
 (`contribute()`); funds are escrowed on-chain. On success the owner calls
